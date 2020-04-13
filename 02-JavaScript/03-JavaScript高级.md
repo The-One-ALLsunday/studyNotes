@@ -155,7 +155,7 @@ Star.prototype.sing = function () {
 
 ### 对象原型
 
-![](H:\06-Web前端\06-笔记\00-images\__proto__.png)
+![](H:\06-Web前端\05-笔记\00-images\__proto__.png)
 
 ### constructor
 
@@ -195,7 +195,7 @@ Star.prototype = {
 两个作用
 
 - 调用函数
-- 改变  this  指向
+- 改变  this  指向，是把调用者（Father）的  this  改变为当前环境下的  this
 
 继承父构造函数属性
 
@@ -209,6 +209,8 @@ function Son(uname, age, score) {
     Father.call(this, uname, age)
     this.score = score
 }
+
+const li = new Son('li', 15, 88)
 ```
 
 
@@ -343,8 +345,6 @@ delete obj.demo
 
 ### 函数的定义和调用
 
-
-
 #### 自定义函数--命名函数
 
 - `function dag() {  }`
@@ -447,7 +447,7 @@ setInterval(function() {}, 1000)
 
 ### 改变this指向
 
-
+是把调用者（Father）的  this  改变为当前环境下的  this  (Son)
 
 #### call()方法
 
@@ -493,7 +493,7 @@ max: 66
 
 - `调用者.bind(指向, arg1, arg2)`
 - 不会调用原来的函数
-- 返回值：原函数改变  this  指向后拷贝产生的新函数
+- 返回值：**bind不会改变原函数的this指向**，返回值是原函数的拷贝，返回值的this指向  bind(this)  中的this
 
 ```javascript
 let o = {
@@ -511,7 +511,9 @@ f()
 
 #### call  apply  bind  的区别
 
-![](H:\06-Web前端\06-笔记\00-images\this.png)
+**call  和  apply没有返回值  bind有返回值**
+
+<img src="H:\06-Web前端\05-笔记\00-images\this.png" style="zoom:60%;" />
 
 
 
@@ -548,10 +550,6 @@ function fn() {
 高阶函数是对其他函数操作的函数，也就是**接收函数作为参数**或将**函数作为返回值输出**
 
 经典就是**回调函数**
-
-
-
-
 
 ## 闭包
 
@@ -723,7 +721,7 @@ function deepCopy(new, old) {
 
 ## 正则表达式
 
-- 两个模式之间加  `|`  表示或者，意思就是两种模式都行
+- 两个模式之间加  `|`  表示或者，意思就是两种模式都行
 
 ### 创建
 
@@ -745,7 +743,7 @@ reg.text('123')
 ### 字符类
 
 - 字符组合  `/[a-zA-Z0-9_-]/`   26个英文字母任何一个字母返回都是 true    只能是一个
-- 内部取反  `/[^a-zA-Z0-9_-]/`   不能包含里面的字符
+- 内部取反  `/[^a-zA-Z0-9_-]/`   不能包含里面的字符
 
 ### 量词符
 

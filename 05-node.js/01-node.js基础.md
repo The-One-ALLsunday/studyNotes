@@ -851,7 +851,7 @@ exit
 - `use` 数据库的名字   切换到指定的数据库（如果没有就会自动新建）   也相当于创建并使用数据库
 - `show collections`  显示当前数据库的所有集合
 - `db.err_log.find()`    查看所有
-- `db.err_log.find().pretty()`   美化输出
+- `db.err_log.find().pretty()`   美化输出
 - 增加数据
 - 删除数据
 - 修改数据

@@ -189,7 +189,7 @@ function fn() {
 
 #### 事件对象
 
-![](H:\06-Web前端\06-笔记\00-images\event-object.png)
+<img src="H:\06-Web前端\05-笔记\00-images\event-object.png" style="zoom:60%;" />
 
 
 
@@ -224,7 +224,7 @@ function fn() {
 <ul>
     <li>1</li> 
 	<li>2</li>
-    <li>3/li>
+    <li>3</li>
     <li>4</li>
     <li>5</li>
     <li>6</li>

@@ -320,8 +320,8 @@ methods: {
     id: '',
     name: '',
     list: [
-      { id: 1, name: 'db'},
-      { id: 2, name: 'dc'},
+      { id: 1, name: 'db' },
+      { id: 2, name: 'dc' },
     ]
   },
   
@@ -929,6 +929,7 @@ Vue.http.options.emulateJSON = true
 - 第五步：在容器内放置一个坑 `<router-view></router-view>`
 - linkActiveClass构造选项可以更改`<router-link></router-link>`的默认类
   	
+  	
   	+ 好处： 可以通过这个添加自己的样式类，可以把bootstrap上的样式类名添加上去。
   	+ router-link 可以通过tag属性改变默认渲染的标签，默认渲染为a标签
 
@@ -1184,7 +1185,7 @@ webpack是基于Node.js
    + `cnpm i babel-core babel-loader babel-plugin-transform-runtime -D`
      
 * babel-loader 下载 7.1.5版本，不要下载最新版本
-     
+  
   + `cnpm i babel-preset-env babel-preset-stage-0 -D`
 
   + `cnpm i vue -S`
@@ -1217,6 +1218,7 @@ webpack是基于Node.js
 
   + `cnpm i vue-preview -S`
     	
+    	
     	* 缩览图插件
 
 ## Node中加载成员和暴露成员方式
@@ -1231,6 +1233,7 @@ webpack是基于Node.js
 ### ES6中导入导出模块
 
 - ES6中导入模块
+  	
   	
   	+ import 模块名称 from '模块表示符'
   	+ import '路径'
