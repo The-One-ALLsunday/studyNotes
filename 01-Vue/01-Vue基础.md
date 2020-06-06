@@ -815,7 +815,7 @@ Vue.http.options.emulateJSON = true
          template: '#tmpl',
          methods: {
            parentmethod(){
-             this.$emit('parentmethod', 123, 456)
+             this.$emit('func', 123, 456)
            }
          }
        }
@@ -928,6 +928,9 @@ Vue.http.options.emulateJSON = true
 
 - 第五步：在容器内放置一个坑 `<router-view></router-view>`
 - linkActiveClass构造选项可以更改`<router-link></router-link>`的默认类
+  	
+  	
+  	
   	
   	
   	+ 好处： 可以通过这个添加自己的样式类，可以把bootstrap上的样式类名添加上去。
@@ -1219,6 +1222,9 @@ webpack是基于Node.js
   + `cnpm i vue-preview -S`
     	
     	
+    	
+    	
+    	
     	* 缩览图插件
 
 ## Node中加载成员和暴露成员方式
@@ -1235,6 +1241,9 @@ webpack是基于Node.js
 - ES6中导入模块
   	
   	
+  	
+  	
+  	
   	+ import 模块名称 from '模块表示符'
   	+ import '路径'
 
@@ -1248,9 +1257,9 @@ webpack是基于Node.js
 
   + export
     	* 使用export向外暴露的成员只能通过{}的方式接收，这种形式叫做按需导出
-    	* 可以向外暴露多个成员
-    	* 必须按照暴露的名称，使用{}接收
-    	* 想使用其他名字接收  可以使用as关键字起别名
+      	  	* 可以向外暴露多个成员
+      	   * 必须按照暴露的名称，使用{}接收
+      	   * 想使用其他名字接收  可以使用as关键字起别名
 
 ## 项目托管
 

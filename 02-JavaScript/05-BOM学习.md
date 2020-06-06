@@ -6,7 +6,9 @@
 - BOM  学习的是浏览器窗口交互的一些对象
 - BOM  是浏览器厂商在各自浏览器上定义的，兼容性差，最初是由  NetScape  公司提出的
 
-![](H:\06-Web前端\06-笔记\00-images\BOM-part.png)window  对象浏览器的顶级对象，具有双重角色
+![](H:\06-Web前端\05-笔记\00-images\BOM-part.png)
+
+- window  对象浏览器的顶级对象，具有双重角色
 
 - 它是  JS  访问浏览器窗口的一个接口
 - 它是一个全局对象。定义在全局作用域的变量、函数都会变成  window  对象的属性和方法。window通常省略
@@ -33,8 +35,6 @@ window.onload是窗口（页面）加载事件，当文档内容完全加载完�
 - 有了窗口加载事件，就可以把  JS  代码写到页面上边了。
 - window.onload  传统注册事件方式只能写一次，重复写多个，只会执行最后一个
 - 使用监听的方式，就没有限制
-
-
 
 ```javascript
 document.addEventListener('DOMContentLoaded', function () {
@@ -109,7 +109,7 @@ window.addEventListener('resize', function () {
 
 JS  是单线程
 
-![](H:\06-Web前端\06-笔记\00-images\asyn-task.png)
+![](H:\06-Web前端\05-笔记\00-images\asyn-task.png)
 
 ### 执行机制
 
@@ -117,13 +117,13 @@ JS  是单线程
 - 后执行异步任务
 - 异步任务一个个执行，执行完就清空任务队列，如果有多个异步任务，先交给异步进程处理
 
-![](H:\06-Web前端\06-笔记\00-images\asyn-task1.png)
+![](H:\06-Web前端\05-笔记\00-images\asyn-task1.png)
 
 ### 事件循环
 
 even  loop
 
-![](H:\06-Web前端\06-笔记\00-images\even-loop.png)
+![](H:\06-Web前端\05-笔记\00-images\even-loop.png)
 
 由于主线程不断的重复获得任务，执行任务、在获取任务、再执行，这种机制被称为**事件循环**
 
@@ -188,7 +188,7 @@ navigation  对象包含有关浏览器的信息，它有很多属性，我们�
 
 下面的代码可以实现自动判断是  PC端打开页面还是移动端打开页面，并自动响应适当的页面
 
-![](H:\06-Web前端\06-笔记\00-images\match-pc-iPhone.png)
+![](H:\06-Web前端\05-笔记\00-images\match-pc-iPhone.png)
 
 ## history对象
 
@@ -227,8 +227,6 @@ offset  翻译过来就是偏移量，我们使用  offset  系列相关属性�
 | offsetWidth包括padding+border+width           | style.width获得不包括padding和border的值      |
 | offsetWidth等属性是只读属性，只能获取不能赋值 | style.width是可读写的属性，可以获取也可以赋值 |
 | 所以，想要获取元素大小位置，用offset更合适    | 所以，想要给元素更改值，则需要用  style       |
-
-
 
 ## 元素可视区  client  系列
 
@@ -271,14 +269,10 @@ scroll  翻译过来就是滚动的，我们使用  scroll  系列的相关属�
 
 ### 主要用法
 
-- offset系列经常用于获得元素位置  offset  offsetTop
+- offset系列经常用于获得元素位置  offsetLeft  offsetTop
 - client经常用于获取元素大小  clientWidth  clientHeight
 - scroll经常用于获取滚动距离  scrollTop  scrollLeft
 - 注意页面滚动的距离通过  window.pageXoffset  获得
-
-
-
-
 
 ## 动画基本原理
 

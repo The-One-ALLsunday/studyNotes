@@ -72,9 +72,7 @@ son.sum()
 - super 关键字用于访问和调用对象父类上的函数
 - 可以调用父类的构造函数，也可以调用父类中的普通函数
 
-<img src="H:\06-Web前端\06-笔记\00-images\class-super.png" style="zoom:60%;" />
-
-
+![](H:\06-Web前端\05-笔记\00-images\class-super.png)
 
 这里的  super  关键字，既可以传到父类中，也可以自己用
 
@@ -137,7 +135,7 @@ let dag = new Star(a, 18)
 
 原型是  对象
 
-构造函数通过原型分配的函数是对所有对象共享的
+构造函数通过原型对象分配的函数是对所有对象共享的
 
 ```javascript
 const Star(x, y) {
@@ -175,15 +173,13 @@ Star.prototype = {
 
 ### 构造函数  prototype  和  constructor  的关系-----原型链
 
-![](H:\06-Web前端\06-笔记\00-images\constructor-prototype-relation.png)
+<img src="H:\06-Web前端\05-笔记\00-images\constructor-prototype-relation.png" style="zoom:60%;" />
 
 
 
 ### 原型链
 
-![](H:\06-Web前端\06-笔记\00-images\__proto__chain.png)
-
-
+<img src="H:\06-Web前端\05-笔记\00-images\__proto__chain.png" style="zoom:60%;" />
 
 ## 继承
 
@@ -219,7 +215,7 @@ const li = new Son('li', 15, 88)
 
 原理：
 
-![](H:\06-Web前端\06-笔记\00-images\inherit_prototype.png)
+![](H:\06-Web前端\05-笔记\00-images\inherit_prototype.png)
 
 
 
@@ -524,7 +520,7 @@ f()
 - `'use strict'`  或者  `"use strict"`  记得加引号
 - 消除代码运行的一些不安全之处，保证代码运行的安全
 - 提高编译器效率，增加运行速度
-- 为未来新版本的JavaScript做好铺垫	
+- 为未来新版本的JavaScript做好铺垫
 
 为个别函数开启严格模式
 
@@ -539,7 +535,7 @@ function fn() {
 ### 改变
 
 - 变量先声明再使用
-- 不能删除一定命名好的变量
+- 不能删除已经命名好的变量
 - 全局作用域下  this  指向  undefined，而不再是  window
 - 构造函数不加  new  调用会报错，不再是  window
 

@@ -233,7 +233,7 @@ arr[3] = 'dag'
 
 let arr = ['red', 'green', 'blue']
 let newArr = []
-for (let i = arr.length; i >= 0; i--) {
+for (let i = arr.length - 1; i >= 0; i--) {
     newArr[newArr.length] = arr[i]
 }
 ```

@@ -12,7 +12,7 @@ Web  API是浏览器提供的一套操作浏览器功能也页面元素的  API
 
 ## DOM树
 
-![](H:\06-Web前端\06-笔记\00-images\dom-tree.png)
+![](H:\06-Web前端\05-笔记\00-images\dom-tree.png)
 
 
 
@@ -85,11 +85,11 @@ Web  API是浏览器提供的一套操作浏览器功能也页面元素的  API
 
 - **传统方式**
 
-![](H:\06-Web前端\06-笔记\00-images\event-on.png)
+![](H:\06-Web前端\05-笔记\00-images\event-on.png)
 
 - **监听注册方式**  ie9
 
-![](H:\06-Web前端\06-笔记\00-images\event-addeventlistener.png)
+![](H:\06-Web前端\05-笔记\00-images\event-addeventlistener.png)
 
 ```javascript
 let btn = document.querySelector('button')
@@ -106,9 +106,7 @@ btn.addEventListener('click', function () {  }, true)
 
 - **传统监听方式**  不推荐  ie9以前才使用
 
-![](H:\06-Web前端\06-笔记\00-images\event-tradition.png)
-
-
+![](H:\06-Web前端\05-笔记\00-images\event-tradition.png)
 
 #### 删除事件
 
@@ -166,16 +164,16 @@ function fn() {
 
 事件发生时会在元素节点之间按照特定的顺序传播，这个传播过程即DOM事件流
 
-![](H:\06-Web前端\06-笔记\00-images\event-spread.png)
+![](H:\06-Web前端\05-笔记\00-images\event-spread.png)
 
 - 事件冒泡：IE  最早提出，事件开始时由最具体的元素接收，然后逐级向上传播到  DOM  最顶层节点的过程
-  - document  ->  html  ->  body  ->  father  ->  son
-- 事件捕获：网景最早提出，由  DOM  最顶层节点开始，然后逐级向下传播到最具体的元素接收的过程
   - son  ->  father  ->  body  ->  html  ->  document
+- 事件捕获：网景最早提出，由  DOM  最顶层节点开始，然后逐级向下传播到最具体的元素接收的过程
+  - document  ->  html  ->  body  ->  father  ->  son
 
 
 
-![](H:\06-Web前端\06-笔记\00-images\event-capture-bubbing.png)
+![](H:\06-Web前端\05-笔记\00-images\event-capture-bubbing.png)
 
 
 
@@ -295,7 +293,7 @@ event  对象代表事件的状态，跟事件相关的一系列信息的集合�
 
 ##### 跟随鼠标移动案例
 
-![](H:\06-Web前端\06-笔记\00-images\mousemove-angel.png)
+![](H:\06-Web前端\05-笔记\00-images\mousemove-angel.png)
 
 
 
@@ -414,9 +412,7 @@ div.onclick = function () {
 
 ### 操作元素总结
 
-![](H:\06-Web前端\06-笔记\00-images\opera-element.png)
-
-
+![](H:\06-Web前端\05-笔记\00-images\opera-element.png)
 
 
 
@@ -541,7 +537,7 @@ H5自定义属性：必须以  `data-`  开头，并且赋值。在  js  中，�
 
 
 
-![](H:\06-Web前端\06-笔记\00-images\create-element.png)
+![](H:\06-Web前端\05-笔记\00-images\create-element.png)
 
 
 
@@ -549,30 +545,24 @@ H5自定义属性：必须以  `data-`  开头，并且赋值。在  js  中，�
 
 ### 创建
 
-![](H:\06-Web前端\06-笔记\00-images\total-create-element.png)
+![](H:\06-Web前端\05-笔记\00-images\total-create-element.png)
 
 ### 增
 
-![](H:\06-Web前端\06-笔记\00-images\total-increase-element.png)
+![](H:\06-Web前端\05-笔记\00-images\total-increase-element.png)
 
 ### 删
 
-![](H:\06-Web前端\06-笔记\00-images\total-remove-element.png)
-
-
+![](H:\06-Web前端\05-笔记\00-images\total-remove-element.png)
 
 ###  改
 
-![](H:\06-Web前端\06-笔记\00-images\total-modify-element.png)
-
-
+![](H:\06-Web前端\05-笔记\00-images\total-modify-element.png)
 
 ### 查
 
-![](H:\06-Web前端\06-笔记\00-images\total-select-element.png)
-
-
+![](H:\06-Web前端\05-笔记\00-images\total-select-element.png)
 
 ### 属性操作
 
-![](H:\06-Web前端\06-笔记\00-images\total-attribute.png)
+![](H:\06-Web前端\05-笔记\00-images\total-attribute.png)
