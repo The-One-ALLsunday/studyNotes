@@ -933,6 +933,7 @@ Vue.http.options.emulateJSON = true
   	
   	
   	
+  	
   	+ 好处： 可以通过这个添加自己的样式类，可以把bootstrap上的样式类名添加上去。
   	+ router-link 可以通过tag属性改变默认渲染的标签，默认渲染为a标签
 
@@ -1220,12 +1221,8 @@ webpack是基于Node.js
       ```
 
   + `cnpm i vue-preview -S`
-    	
-    	
-    	
-    	
-    	
-    	* 缩览图插件
+    
+    * 缩览图插件
 
 ## Node中加载成员和暴露成员方式
 
@@ -1239,12 +1236,8 @@ webpack是基于Node.js
 ### ES6中导入导出模块
 
 - ES6中导入模块
-  	
-  	
-  	
-  	
-  	
-  	+ import 模块名称 from '模块表示符'
+  
+  + import 模块名称 from '模块表示符'
   	+ import '路径'
 
 - ES6向外暴露成员

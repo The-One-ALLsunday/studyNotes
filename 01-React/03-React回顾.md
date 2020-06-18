@@ -277,6 +277,8 @@ ReactDOM.render(<div>
 
 在react中有一套自己的事件绑定机制，事件名，采用驼峰命名法
 
+`onClink = { function }`
+
 **方法一：**行内写匿名函数`onClick={function () { console.log('ok') }}`
 
 ```jsx
@@ -339,10 +341,10 @@ class MyEvent extends React.Component {
     }
     render() {
         return <div>
-        	<button onClick={ () => { this.myClickHandler() } }></button>
+        	<button onClick={ () => { this.myClickHandler('arg1') } }></button>
         </div>
     }
-    myClickHandler = () => {
+    myClickHandler = (arg1) => {
         console.log('2222')
     }
 }
@@ -354,9 +356,52 @@ ReactDOM.render(<div>
 
 
 
+## setState
+
+如果想要修改state中的数据，推荐使用`this.setState({  })`
+
+```jsx
+export default class BindEvent extends React.Component {
+    constructor () {
+        super()
+        this.state = {
+            msg: '哈哈'
+        }
+    }
+    render() {
+        return <div>
+        	<button onClick={() => this.show }></button>
+        </div>
+    }
+    show = () => {
+        this.setState({
+            msg: 123
+        })
+    }
+}
+```
+
+### 注意点
+
+- 在  setState  中，只会把对应的 state  状态更新，不会覆盖其它的  state  状态
+- `this.setState({  })`  方法是异步的，因此，该方法可能还没执行结束，后续的代码就可能会执行。另外，该方法有第二个参数，是一个回调函数，这个回调函数帮助我们，既可以拿到页面上最新的数据，也可以使用  `this.setState({})`  方法。
+
+```jsx
+this.setState({
+    msg: '最新数据'
+}, function () {
+    console.log('ok')
+})
+```
 
 
 
+## 新注释方法
+
+```jsx
+//#region 名字（介绍React中绑定事件的标准格式）
+//#endregions
+```
 
 
 

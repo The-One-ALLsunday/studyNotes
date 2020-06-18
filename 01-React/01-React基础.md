@@ -175,11 +175,11 @@ ReactDOM.render(<div>
 
     > componentWillUnmount函数：组件将要被卸载，此时组件还可以正常使用
 
-<img src="H:\06-Web前端\05-笔记\00-images\React-lifecircle.png" alt="组件的生命周期" style="zoom:75%;" />
+![](D:\05_note\studyNotes\00-images\React-lifecircle.png)
 
 组件生命周期表格
 
-![组件生命周期表格](H:\06-Web前端\05-笔记\00-images\React-Lifecircle-table.png)
+![](D:\05_note\studyNotes\00-images\React-Lifecircle-table.png)
 
 ### 组件生命周期执行顺序
 
@@ -440,6 +440,8 @@ class Rot extends React.Component{
   ```
 
   
+
+## Hooks
 
 
 
