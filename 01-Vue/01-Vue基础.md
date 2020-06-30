@@ -934,6 +934,7 @@ Vue.http.options.emulateJSON = true
   	
   	
   	
+  	
   	+ 好处： 可以通过这个添加自己的样式类，可以把bootstrap上的样式类名添加上去。
   	+ router-link 可以通过tag属性改变默认渲染的标签，默认渲染为a标签
 
