@@ -177,6 +177,8 @@ ReactDOM.render(<div>
 
 ![](D:\05_note\studyNotes\00-images\React-lifecircle.png)
 
+<img src="/Volumes/job/05_note/studyNotes/00-images/React-lifecircle.png" style="zoom:75%;" />
+
 组件生命周期表格
 
 ![](D:\05_note\studyNotes\00-images\React-Lifecircle-table.png)
