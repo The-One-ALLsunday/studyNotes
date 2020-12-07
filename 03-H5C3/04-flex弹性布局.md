@@ -12,8 +12,8 @@ flexible box  译为  弹性布局，任何容器都可以指定为flex布局
 ## 给容器添加常见属性
 
 - flex-direction：设置主轴方向
-  - 默认主轴方向就是  x  轴方向，水平向右   row
-  - 默认侧轴方向就是  y  轴方向，垂直向下   column
+  - 默认主轴方向就是  x  轴方向，水平向右   row、row-reverse
+  - 默认侧轴方向就是  y  轴方向，垂直向下   column、column-reverse
 - justify-content：设置**主轴**上的子元素排列方式
   - center
   - space-around   平均分配剩余空间
