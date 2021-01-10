@@ -105,9 +105,6 @@ Hypertext    Markup  Language    超文本标记语言
 - `p`                  不可以包含块元素
 - `h1`
 - `br`
-- 
-
-
 
 ## 行间块状元素
 
@@ -185,7 +182,7 @@ Web标准是由  W3C 组织和其他标准化组织制定的一系列标准的�
 - en  就是英文
 - zh-CN  就是中文
 
-`<html lang="en"></html`
+`<html lang="en"></html>`
 
 ### charset字符集
 
@@ -324,7 +321,7 @@ src  是属性，路径加文件名
 ```html
 <ul>
 	<li></li>
-    <li></li>
+  <li></li>
 </ul>
 ```
 

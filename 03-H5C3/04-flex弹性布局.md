@@ -15,6 +15,8 @@ flexible box  译为  弹性布局，任何容器都可以指定为flex布局
   - 默认主轴方向就是  x  轴方向，水平向右   row、row-reverse
   - 默认侧轴方向就是  y  轴方向，垂直向下   column、column-reverse
 - justify-content：设置**主轴**上的子元素排列方式
+  - flex-start
+  - flex-end
   - center
   - space-around   平均分配剩余空间
   - space-between  先两边贴边，然后分配剩余空间      **重点**
@@ -23,11 +25,16 @@ flexible box  译为  弹性布局，任何容器都可以指定为flex布局
   - nowrap  不换行
   - wrap  换行
 - align-items：设置侧轴上的子元素的排列方式（单行）
+  - flex-start
+  - flex-end
   - center  侧轴居中             **重点**
   - stretch  拉伸
     - 子盒子不要给高度
+  - baseline
 - align-content：设置侧轴上子元素的排列方式（多行）
   - 适用于子元素**换行**的情况下
+  - flex-start
+  - flex-end
   - center
   - space-between
   - space-around

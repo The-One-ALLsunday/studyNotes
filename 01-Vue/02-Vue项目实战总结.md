@@ -75,7 +75,7 @@
 
 - 链式编程方式
 
-  ![](H:\06-Web前端\05-笔记\00-images\chainWebpack.png)
+  ![](/Volumes/career/04_note/studyNotes/00-images/chainWebpack.png)
 
 
 
@@ -87,7 +87,7 @@
 
 - 配置如下：结合生产环境使用
 
-  ![](H:\06-Web前端\05-笔记\00-images\externals.png)
+  ![](/Volumes/career/04_note/studyNotes/00-images/externals.png)
 
 
 
@@ -95,11 +95,11 @@
 
   **css**
 
-  ![](H:\06-Web前端\05-笔记\00-images\cdncss.png)
+  ![](/Volumes/career/04_note/studyNotes/00-images/cdncss.png)
 
   **js**
 
-  ![](H:\06-Web前端\05-笔记\00-images\cdnjs.png)
+  ![](/Volumes/career/04_note/studyNotes/00-images/cdnjs.png)
 
 **CDN中优化Element-UI**
 
@@ -129,39 +129,39 @@
 
 - 将路由改为按需加载形式
 
-  ![](H:\06-Web前端\05-笔记\00-images\vuerouterlazy.png)
+  ![](/Volumes/career/04_note/studyNotes/00-images/vuerouterlazy.png)
 
 ## 首页内容定制
 
 不同的打包环境下，首页内容可能会有所不同，我们可以通过插件的方式进行定制，插件配置如下
 
-![](H:\06-Web前端\05-笔记\00-images\indexargs.png)
+![](/Volumes/career/04_note/studyNotes/00-images/indexargs.png)
 
 在  `public/index.html`  首页中，可以根据  `isPord`  的值，来决定如何渲染页面结构：
 
-![](H:\06-Web前端\05-笔记\00-images\indexargs1.png)
+![](/Volumes/career/04_note/studyNotes/00-images/indexargs1.png)
 
 # 项目上线
 
 ## 通过Node创建web服务器
 
-![](H:\06-Web前端\05-笔记\00-images\projectonline.png)
+![](/Volumes/career/04_note/studyNotes/00-images/projectonline.png)
 
 ## 开启gzip配置
 
-![](H:\06-Web前端\05-笔记\00-images\gzip.png)
+![](/Volumes/career/04_note/studyNotes/00-images/gzip.png)
 
 配置
 
-![](H:\06-Web前端\05-笔记\00-images\compression.png)
+![](/Volumes/career/04_note/studyNotes/00-images/compression.png)
 
 ## 配置https服务
 
-![](H:\06-Web前端\05-笔记\00-images\https.png)
+![](/Volumes/career/04_note/studyNotes/00-images/https.png)
 
 配置：
 
-![](H:\06-Web前端\05-笔记\00-images\httpsconfig.png)
+![](/Volumes/career/04_note/studyNotes/00-images/httpsconfig.png)
 
 ## 使用pm2管理应用
 

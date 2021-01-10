@@ -250,7 +250,13 @@ ReactDOM.render(<div>
 
 - class中创建的组件，通过props传递的参数，不需要接收，直接通过`this.props.xxx`即可访问
 
-## CSS启用模块化
+## React中的样式
+
+### CSS启用模块化
+
+不启用css模块化，直接导入样式表，默认是全局样式，在整个项目上生效。
+
+- 原因：样式表没有独立作域
 
 当我们把样式独立到一个css文件中，对其引用需要`import cssobj from './index.css'`，但这里的cssobj是一个空对象，需要在webpack中启用css模块化。这样，cssobj这个对象的属性是css文件中的类名，但这个属性不是引用时的类名，属性值是类名。
 
@@ -261,9 +267,19 @@ ReactDOM.render(<div>
 
 通过`:global()`对某一项样式取消模块化
 
+	- 取消模块化，代表是全局样式
+
 通过`:local()`对某一项样式开启模块化
 
-## 在项目中启用模块化并同时使用bootstrap
+- 开启模块化。在项目开启模块化，就没必要再使用这个 **包裹** 平常的类名了
+
+### 使用第三方样式less，sass，scss
+
+项目中，我们常常会使用第三方的样式库文件，开启  `css`  模块化后，会使第三方的样式库也被模块化，因此就不能使用类似于  `<button className="btn btn-primary" ></button>`。因为 `btn btn-primary` 这样的类名会被模块化，正确的使用方式为`<button  className={ [styles.btn, styles['btn-primary']].join( ) }></button>`，使用起来极其不方便。
+
+为了解决这个问题，我们在项目上通常会使用第三方的样式  `less, sass, scss`，只为  `less, sass, scss`  开启模块化就好了，这是因为第三方的样式都是以  `.css`  结尾的
+
+### 在项目中启用模块化并同时使用bootstrap
 
 为css启用模块化的同时使用第三方以.css结尾的文件样式库，会发生自己跟自己冲突的情况。
 

@@ -72,7 +72,7 @@ son.sum()
 - super 关键字用于访问和调用对象父类上的函数
 - 可以调用父类的构造函数，也可以调用父类中的普通函数
 
-![](/Volumes/job/04_note/studyNotes/00-images/class-super.png)
+![](/Volumes/career/04_note/studyNotes/00-images/class-super.png)
 
 这里的  super  关键字，既可以传到父类中，也可以自己用
 
@@ -153,7 +153,7 @@ Star.prototype.sing = function () {
 
 ### 对象原型
 
-![](/Volumes/job/04_note/studyNotes/00-images/__proto__.png)
+![](/Volumes/career/04_note/studyNotes/00-images/__proto__.png)
 
 ### constructor
 
@@ -173,11 +173,11 @@ Star.prototype = {
 
 ### 构造函数  prototype  和  constructor  的关系-----原型链
 
-![](/Volumes/job/04_note/studyNotes/00-images/constructor-prototype-relation.png)
+![](/Volumes/career/04_note/studyNotes/00-images/constructor-prototype-relation.png)
 
 ### 原型链
 
-![](/Volumes/job/04_note/studyNotes/00-images/__proto__chain.png)
+![](/Volumes/career/04_note/studyNotes/00-images/__proto__chain.png)
 
 ## 继承
 
@@ -213,7 +213,7 @@ const li = new Son('li', 15, 88)
 
 原理：
 
-![](/Volumes/job/04_note/studyNotes/00-images/inherit_prototype.png)
+![](/Volumes/career/04_note/studyNotes/00-images/inherit_prototype.png)
 
 
 
@@ -507,7 +507,7 @@ f()
 
 **call  和  apply没有返回值  bind有返回值**
 
-<img src="H:\06-Web前端\05-笔记\00-images\this.png" style="zoom:60%;" />
+![](/Volumes/career/04_note/studyNotes/00-images/this.png)
 
 
 
@@ -677,7 +677,7 @@ Object.assign(o, obj)
 
 ### 深拷贝
 
-新拷贝的内容会在内存空间重新开辟一块内存空间，与原来就不是同一个东西了
+深拷贝的内容会在内存空间重新开辟一块内存空间，与原来就不是同一个东西了
 
 用到递归的原理
 
@@ -778,7 +778,7 @@ uname.onblur = function () {
 
 ### 预定义类
 
-![](H:\06-Web前端\06-笔记\00-images\reg.png)
+![](/Volumes/career/04_note/studyNotes/00-images/reg.png)
 
 ### 正则表达式的匹配问题[switch]
 
