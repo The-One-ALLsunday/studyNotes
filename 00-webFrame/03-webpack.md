@@ -337,5 +337,88 @@ loader是文件加载器，能够加载资源文件，并对这些文件进行�
 - loader是一个转换器：将A文件进行编译形成B文件，这里操作的是文件，比如将 A.scss 转换为 A.css，是单纯的文件转换过程。
 - plugin是一个插件扩展器：针对webpack打包的过程，它不直接操作文件，而是基于事件机制工作，会监听webpack打包过程中的某些事件钩子，执行任务。plugin 比loader 强大，通过plugin 可以访问 compliler和compilation过程，通过钩子拦截 webpack 的执行。
 
-## 性能优化
+## webpack优化策略
+
+weback资料第五章
+
+### webpack4本身的优化
+
+- V8 带来的优化(for of 替代 forEach、Map 和 Set 替代 Object、includes 替代 indexOf)
+- 默认使用更快的 md4 hash 算法
+- webpacks AST 可以直接从 loader 传递给 AST，减少解析时间
+- 使用字符串方法替代正则表达式
+
+### 速度优化
+
+#### 速度分析
+
+- 插件：speed-measure-webpack-plugin
+- 作用：
+  - 分析整个打包总耗时
+  - 每个插件和loader的耗时情况
+
+#### 解决方案
+
+- 多进程/多实例:并行压缩
+  - 方案1：使用 parallel-uglify-plugin 插件
+  - 方案2：uglifyjs-webpack-plugin 开启 parallel 参数
+  - 方案3：terser-webpack-plugin 开启 parallel 参数
+- 分包
+  - 使用 html-webpack-externals-plugin
+  - 进一步分包：使用 DLLPlugin 进行分包，DllReferencePlugin 对 manifest.json 引用。思路：将 react、react-dom、redux、react-redux 基础包和业务基础包打包成一个文件
+- 缓存
+  - babel-loader 开启缓存
+  - terser-webpack-plugin 开启缓存
+  - 使用 cache-loader 或者 hard-source-webpack-plugin
+- 缩小构建目标
+  - 不解析 node_modules中的js，css等资源
+- 减少文件搜索范围
+  - 优化 resolve.modules 配置(减少模块搜索层级)
+  - 优化 resolve.mainFields 配置
+  - 优化 resolve.extensions 配置
+  - 合理使用 alias
+
+### 体积优化
+
+#### 体积分析
+
+- 插件：webpack-bundle-analyzer
+- 作用
+  - 依赖第三方模块文件大小
+  - 业务组件代码大小
+
+### 解决方案
+
+- Scope Hoisting：作用域提升，webpack 会把引入的 js 文件“提升到”它的引入者顶部。ES6异步导入`import (../bundle.js);`，不回提升。
+  - 插件：
+  - 优点
+    - 代码量明显减少
+    - 内存占有量减少
+    - 运行速度提升
+- Tree-shaking：1 个模块可能有多个方法，只要其中的某个方法使用到了，则整个文件都会被打到 bundle 里面去，tree shaking 就是只把用到的方法打入 bundle ，没用到的方法会在 uglify 阶段被擦除掉。
+  - 使用：webpack 默认支持，在 .babelrc 里设置 modules: false 即可 · production mode的情况下默认开启
+  - 要求：必须是 ES6 的语法，CJS 的方式不支持要求：必须是 ES6 的语法，CJS 的方式不支持
+  - 优点
+    - tree shaking 就是只把用到的方法打入 bundle ，没用到的方法会在 uglify 阶段被擦除掉
+
+- 公共资源分离
+  - 插件：
+  - 优点
+    - 
+- 图片压缩
+  - 解析器： image-webpack-loader
+  - 优点
+    - 有很多定制选项
+    - 可以引入更多第三方优化插件，例如pngquant
+    - 可以处理多种图片格式
+- 动态Polyfill：浏览器原生不支持es6，es7等新特性，可以用ployfill实现
+  - 插件：
+  - 优点
+    - 浏览器兼容处理
+  - 缺点
+    - 包含所有补丁，不管项目是否用到，都全量引用
+- 删除无用的CSS
+  - 思路：PurifyCSS: 遍历代码，识别已经用到的 CSS class
+  - uncss: HTML 需要通过 jsdom 加载，所有的样式通过PostCSS解析，通过 document.querySelector 来识别在 html 文件里面不存在的选择器
+  - 插件：purgecss-webpack-plugin 和 mini-css-extract-plugin
 
