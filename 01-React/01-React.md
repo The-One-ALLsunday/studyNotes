@@ -39,8 +39,6 @@ Facebook  出版，在2013年5月开源
 - 社区强大，很对问题都能找到解决方案
 - 通过  ReactNative  无缝衔接到移动  App  的开发
 
-
-
 ## React中的几个核心概念
 
 ### 虚拟DOM
@@ -95,7 +93,7 @@ React  官方，提出了一套  JSX  语法规范，能够让我们在  JS  文
 
 结论：组件的首字母，必须大写
 
-### 第一种创建组件的方式和传参
+### 函数组件
 
 ```jsx
 以扩展运算符，通过属性传参
@@ -119,7 +117,7 @@ ReactDOM.render(<div>
     </div>, document.getElementById('app'))
 ```
 
-### 第二种创建组件的方式--class和传参
+### 类组件
 
 ```jsx
 class Hello extends React.Component {
@@ -179,7 +177,7 @@ ReactDOM.render(<div>
 
 组件生命周期表格
 
-![](D:\05_note\studyNotes\00-images\React-Lifecircle-table.png)
+![](/Volumes/career/04_note/studyNotes/00-images/React-Lifecircle-table.png)
 
 ### 组件生命周期执行顺序
 
@@ -233,8 +231,6 @@ ReactDOM.render(<div>
     	<Args></Args>
     </div>, document.getElementById('app'))
 ```
-
-
 
 ### 在构造函数constructor中绑定并传参
 

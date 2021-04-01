@@ -112,14 +112,6 @@ Hypertext    Markup  Language    超文本标记语言
 - `a`                 可以包含任何元素，除了本身
 - `img`
 
-
-
-
-
-
-
-
-
 # HTML学习
 
 ## Web标准
@@ -505,11 +497,9 @@ line-height:
 ## CSS复合选择器
 
 - 后代选择器：`ol li`
-
 - 子选择器:   `ol > li`
-
 - 并集选择器:  `ol,ul`
-
+- 交集选择器: `div.myclass`
 - 伪类选择器：
 
   - 链接伪类选择器

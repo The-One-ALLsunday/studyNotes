@@ -255,10 +255,6 @@ for (let i = 0; i <= arr.length - 1; i++) {
 }
 ```
 
-
-
-
-
 ## 函数
 
 函数就是封装了一段可重复使用的代码块
@@ -272,9 +268,9 @@ return   返回给函数的调用者  还有终止函数的功能
 作用域：就是代码名字在某个范围内起作用和效果    主要是  变量
 
 - 全局作用域
-- 局部作用域
+- 局部作用域（函数作用域）
 
-作用域链：内部函数访问外部函数的变量，采取的是链式查找的方式来决定取那个值
+作用域链：内部函数访问外部函数的变量，采取的是链式查找的方式来决定取那个值，js在预编译时访问的
 
 ## 预解析
 
@@ -283,7 +279,43 @@ js引擎：先预解析，然后执行
 - 变量预解析
 - 函数预解析  函数本身全部放到最前边
 
+### 预解析步骤
 
+- 函数作用域
+
+  - 创建AO对象
+  - 找形参和变量声明，将变量和形参名当作AO对象属性名值为undefined
+  - 实参形参相统一
+  - 在函数体里找函数声明，值赋予函数体
+
+  ```javascript
+  function fn(a, c) {
+    console.log(a); // function a() {}
+    var a = 123;
+    console.log(a); // 123
+    console.log(c); // function c() {}
+    function a() {};
+    if (false) {
+      var d = 678;
+    };
+    console.log(d); // undefined
+    console.log(b); // undefined
+    var b = function () {}; // 非函数声明
+    console.log(b); // function() {}
+    function c() {};
+    console.log(c); // function c() {}
+  };
+  fn (1, 2);
+  AO {
+    a: undefined, 1， function a(){},
+    c: undefined, 2， function c() {},
+    d: undefined,
+    b: undefined,
+  }
+  ```
+
+- 全局作用域
+  - 创建GO对象
 
 ## 对象
 

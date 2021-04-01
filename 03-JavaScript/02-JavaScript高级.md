@@ -1,4 +1,4 @@
-# JavaScript高级学习
+#  3JavaScript高级学习
 
 ## 类
 
@@ -497,7 +497,7 @@ function fn() {
     
 }
 
-let f = fn.bind(0)
+let f = fn.bind(o)
 f()
 ```
 
@@ -785,3 +785,81 @@ uname.onblur = function () {
 - `g`  全局匹配
 - `i`  忽略大小写
 - `gi`  全局匹配  +  忽略大小写
+
+## 防抖函数和节流函数
+
+### 防抖函数
+
+当持续触发事件，一定时间内没有再触发事件，事件处理函数才会执行一次。如果设定时间到来之前又一次触发了事件，就重新开始计时。
+
+- 定时器
+- 闭包
+
+举个🌰
+
+```javascript
+<input type="text" id="input" />
+  
+// 防抖函数
+const debounce = (delay) => {
+  let timer;
+  return (value) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      console.log(value);
+    }, delay);
+  };
+};
+
+let input = document.getElementById('input');
+let debounceFn = debounce(1000);
+input.addEventListener('keyup', e => {
+  debounceFn(e.target.value);
+});
+
+```
+
+### 节流函数
+
+当持续触发事件的时候，保证一段时间内 只调用一次事件处理函数，一段时间内，只做一件事情
+
+举个🌰
+
+```javascript
+<input type="button" id="button" />
+
+const throttleFn = (callback, delay) => {
+  let timer;
+  return () => {
+    if (!timer) {
+      timer = setTimeout(() => {
+        callback();
+        timer = null;
+      }, delay)；
+    };
+  };
+};
+
+const fn = () => {
+  console.log(Math.random());
+};
+
+documnet.getElementById('button').onclick = throttleFn(fn, 1000);
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

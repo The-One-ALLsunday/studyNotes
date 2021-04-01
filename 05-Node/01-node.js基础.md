@@ -1,4 +1,4 @@
-# node.js学习
+# node.js基础
 
 作者：Ryan Dahl
 
@@ -230,10 +230,15 @@ server.listen(3000, function () {
 
 ### node中的其他成员
 
+`~/dist/a.js`
+
 在每个模块中，除了`require`、`exports`等模块相关API之外，还有两个特殊的成员
 
 - `__dirname`        可以用来获取**当前文件模块**所属目录的绝对路径
+  - 拿到的是`~/dist`
 - `__filename`      可以用来获取**当前文件**的绝对路径
+  - 包括文件本身
+  - 拿到的是`~/dist/a.js`
 
 ## 客户端渲染和服务端渲染的区别
 

@@ -1,4 +1,4 @@
-# Vue学习
+#  Vue学习
 
 ```javascript
 <div id="app"></div>
@@ -35,14 +35,14 @@ var vm = new Vue({
     router: routerobj,
     watch: {
         firstname: function (newVal, oldVal) {
-            this.fullname = newVal + this.last.name
+            this.fullname = newVal + this.lastname
         },
         lastname: function (newVal, oldVal) {
             this.fullname = this.firstname + newVal
         }
     },
     computed: {
-        fullname: function () {
+        fullname: function () { // 只要计算属性的function中，所依赖的任何数据发生变化了，则会触发计算属性重新求值
             return this.firstname + this.lastname
         }
     },
@@ -171,11 +171,10 @@ var vm = new Vue({
 
 - v-if 每次是创建或删除元素
   
-+ 有切换性能消耗
-  
+  - 有切换性能消耗
 - v-show 每次不会创建或删除元素，通过`display`样式属性来显示隐藏元素
-  	
-  	+ 有较高的初始渲染消耗
+  
+  - 有较高的初始渲染消耗
 
 ## 在Vue中使用样式
 
@@ -438,19 +437,19 @@ methods: {
   	+ 第一个生命周期函数
 
 - created
-  	+ 第二个生命周期函数
-  	+ 在这个函数中，vm实例中的 data 和 methods 初始化好了，可以使用
+   + 第二个生命周期函数
+  +  在这个函数中，vm实例中的 data 和 methods 初始化好了，可以使用
 
 - beforMount
     + 第三个生命周期函数
     + 模板在内存中已经编译好了，但是尚未把模板渲染到页面中
 
 - mounted
-  	+ 第四个生命周期函数
-  	+ 内存中的模板已经完全挂载到页面上了，用户已经可以清楚的看到渲染好的页面
-  	+ 这是vm实例在创建期间最后一个生命周期函数
-  	+ 没有额外的操作，程序员的工作就完成了
-  	+ 想要操作页面上的DOM节点，最早在这个mounted钩子函数中操作
+   + 第四个生命周期函数
+  + 内存中的模板已经完全挂载到页面上了，用户已经可以清楚的看到渲染好的页面
+  + 这是vm实例在创建期间最后一个生命周期函数
+  + 没有额外的操作，程序员的工作就完成了
+  + 想要操作页面上的DOM节点，最早在这个mounted钩子函数中操作
 
 ### 运行期间的生命周期函数
 
@@ -540,8 +539,6 @@ Vue.http.options.root = "http://vue.studyit.io/"
 ```javascript
 Vue.http.options.emulateJSON = true
 ```
-
-
 
 ## Vue中的动画
 
@@ -699,7 +696,7 @@ Vue.http.options.emulateJSON = true
       template: '<h1>这是用Vue.extend创建的组件</h1>'
     })
   
-    // 2. 祖册com1这个组件
+    // 2. 注册com1这个组件
     Vue.component('myCom', com1)
   
     // 3. 使用组件  在容器内直接以标签的形式引入组件名
@@ -928,13 +925,6 @@ Vue.http.options.emulateJSON = true
 
 - 第五步：在容器内放置一个坑 `<router-view></router-view>`
 - linkActiveClass构造选项可以更改`<router-link></router-link>`的默认类
-  	
-  	
-  	
-  	
-  	
-  	
-  	
   	+ 好处： 可以通过这个添加自己的样式类，可以把bootstrap上的样式类名添加上去。
   	+ router-link 可以通过tag属性改变默认渲染的标签，默认渲染为a标签
 
@@ -1076,8 +1066,44 @@ Vue.http.options.emulateJSON = true
 
 ## computed、methods和watch的区别
 
--  computed属性的结果会被缓存，除非依赖的响应式属性发生变化才会重新计算
+- computed 和 methods 可以监听 vm 实例上的所有属性
+
+- computed属性的结果会被缓存，除非依赖的响应式属性发生变化才会重新计算
+
+  - 只要计算属性的function中，所依赖的任何数据发生变化了，则会触发计算属性重新求值
+
+    ```ja
+    <input v-model="fullname" />
+    
+    computed: {
+            'fullname': function () { // 只要计算属性的function中，所依赖的任何数据发生变化了，则会触发计算属性重新求值
+                return this.firstname + this.lastname
+            }
+        },
+        
+        
+        
+    <input v-model="fullname" />
+    
+    computed: {
+            'fullname': {
+            	get() {
+            		return this.firstname + this.lastname
+            	},
+            	set(value) {
+            		const parts = value.split('-');
+            		this.firstname = parts[0];
+            		this.lastname = parts[1];
+            	}
+            }
+        },
+        
+        
+        
+    ```
+
 - methods方法表示一个具体的操作，主要书写业务逻辑
+
 - watch是一个对象，键是需要观察的表达式，值是对应回调函数，主要用来监听某些特定数据的变化，从而进行某些业务逻辑的操作，可以看成是methods和computed的结合体
 
 

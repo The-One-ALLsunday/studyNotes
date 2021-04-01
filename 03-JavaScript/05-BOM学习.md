@@ -109,7 +109,7 @@ window.addEventListener('resize', function () {
 
 JS  是单线程
 
-![](H:\06-Web前端\05-笔记\00-images\asyn-task.png)
+![](/Volumes/career/04_note/studyNotes/00-images/asyn-task.png)
 
 ### 执行机制
 
@@ -123,7 +123,7 @@ JS  是单线程
 
 even  loop
 
-![](H:\06-Web前端\05-笔记\00-images\even-loop.png)
+![](/Volumes/career/04_note/studyNotes/00-images/even-loop.png)
 
 由于主线程不断的重复获得任务，执行任务、在获取任务、再执行，这种机制被称为**事件循环**
 

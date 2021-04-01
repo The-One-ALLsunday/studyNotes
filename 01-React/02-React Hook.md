@@ -2,7 +2,7 @@
 
 ## useEffect
 
-- componentDidMount, componentDidUpdata, componentWillUnmount
+- componentDidMount, componentDidUpdate, componentWillUnmount
 - 副作用：DOM操作、数据请求、组件更新
 - useEffect为什么在组件函数内部执行，可以获取props和state，采用闭包的形式
 - 无阻塞更新
@@ -115,7 +115,7 @@ export default () => {
 1、一个页面上使用了useContext
 
 ```jsx
-import { useContext, createContext, useEffect, useRef }
+import { useContext, createContext, useEffect, useRef } from 'react'
 import { Input, Button } from 'antd'
 	
 const MyContext = createContext()  // 创建一个容器
@@ -142,7 +142,7 @@ export default () => {
   	<>
     	<MyContext.Provider value={count}>  // 把父组件的count传递给子组件
     
-    		<ChildContexty></ChildContexty>
+    		<ChildContext></ChildContext>
     	</MyContext.Provider>
     
     	<Input type="text" inputRef={inputRef}  />
@@ -317,7 +317,6 @@ export default () => {
 import { useState, useCallback } from 'react'
 import { Button } from 'antd'
 
-
 export default () => {
   const [count, setCount] = useState(0)
   const [num, setNum] = useState(0)
@@ -435,7 +434,7 @@ export default () => {
   }
   return (
   	<>
-    	<Imerative ref={el}></Imerative>
+    	<Imerative refa={el}></Imerative>
     	<Button onClick={handleChange}></Button>
     </>
   )
@@ -648,7 +647,7 @@ export default () => {
 Index文件
 
 ```jsx
-import { Reducer } from './Reducer'
+import Reducer from './Reducer'
 import { Text1 } from './Text1'
 import { Text2 } from './Text2'
 
@@ -680,7 +679,7 @@ export default () => {
 注意：
 
 - 自定义hook必须以use开头
-- 自定义hook，可以使用我们这些hook（useState，useEffec。。。）来封装
+- 自定义hook，可以使用我们这些hook（useState，useEffect。。。）来封装
 
 ```jsx
 import { useState } from 'react'
