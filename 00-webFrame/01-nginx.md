@@ -83,7 +83,7 @@ Nginx：upstream  功能分发
 
 - 反向代理：外网访问内网
 
-<img src="/Volumes/work/04_note/studyNotes/00-images/01_angecyServe.png" style="zoom:80%;" />
+<img src="../00-images/01_angecyServe.png" style="zoom:80%;" />
 
 - nginx
 - squid

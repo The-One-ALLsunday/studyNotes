@@ -336,3 +336,6 @@ loader是文件加载器，能够加载资源文件，并对这些文件进行�
 
 - loader是一个转换器：将A文件进行编译形成B文件，这里操作的是文件，比如将 A.scss 转换为 A.css，是单纯的文件转换过程。
 - plugin是一个插件扩展器：针对webpack打包的过程，它不直接操作文件，而是基于事件机制工作，会监听webpack打包过程中的某些事件钩子，执行任务。plugin 比loader 强大，通过plugin 可以访问 compliler和compilation过程，通过钩子拦截 webpack 的执行。
+
+## 性能优化
+
