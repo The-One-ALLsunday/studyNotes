@@ -389,7 +389,7 @@ weback资料第五章
 
 ### 解决方案
 
-- Scope Hoisting：作用域提升，webpack 会把引入的 js 文件“提升到”它的引入者顶部。ES6异步导入`import (../bundle.js);`，不回提升。
+- Scope Hoisting：作用域提升，webpack 会把引入的 js 文件“提升到”它的引入者顶部。ES6异步导入`import (../bundle.js);`，不会提升。
   - 插件：
   - 优点
     - 代码量明显减少

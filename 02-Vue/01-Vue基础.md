@@ -1341,3 +1341,59 @@ vuex是为了保存组件之间共享数据而诞生的，如果组件之间有�
 - 如果组件想直接从state上获取数据，需要this.$store.state.***
 - 如果组件想要修改 state上的数据，必须使用mutations提供方法，需要this.$store.commit('方法的名称'，唯一的一个参数)
 - 如果store中state上的数据，在对外提供的时候，需要一层包装，推荐使用getters，如果需要使用getters，则用this.$store.getters.***
+
+## 发布者订阅者模式
+
+核心回掉函数
+
+```javascript
+const shopObj = { }; // 定义发布者
+shopObj.list = [];  // 缓存列表  存放的是订阅的函数
+
+// 增加订阅者
+shopObj.listen = function(key, fn) {
+  if (!this.list[key]) [
+    this.list[key] = [];
+  ];
+  
+  this.list[key].push(fn);
+};
+
+// 发布消息
+shopObj.trigger = function() {
+  let key = Array.prototype.shift(arguments);
+  fns = this.list[key];
+  if (!fns || fns.lenght === 0) {
+    return;
+  };
+  for(let i = 0, fn; fn = fns[i++];) {
+    fn.apply(this, arguments);
+  };
+};
+
+shopObj.listen('red', function( size) {
+  console.log('red size is', size);
+});
+
+shopObj.listen('black', function(size) {
+  console.log('black size is', size);
+});
+
+shopObj.trigger('red', 42);
+shopObj.trigger('black', 43)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

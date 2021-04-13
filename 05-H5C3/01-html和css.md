@@ -988,6 +988,24 @@ calc()  此函数让你在声明CSS属性值时执行一些计算
 - 运动曲线：默认是  ease（可以省略）
 - 何时开始：单位是秒（必须写单位）可以设置延迟触发事件  默认是  0s（可以省略）
 
+## BFC
+
+块级格式化上下文。
+
+特点
+
+- 只有块级盒子参与
+  - float不为none
+  - position不为static或者relative
+  - display的值为inline-block、flex、inline-flex
+  - overflow：hidden
+- 与外部无关
+
+作用
+
+- 解决外边距合并问题
+- 解决元素被浮动元素覆盖问题
+
 
 
 
