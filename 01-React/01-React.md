@@ -173,11 +173,11 @@ ReactDOM.render(<div>
 
     > componentWillUnmount函数：组件将要被卸载，此时组件还可以正常使用
 
-![](/Volumes/career/04_note/studyNotes/00-images/React-lifecircle.png)
+![](../00-images/React-lifecircle.png)
 
 组件生命周期表格
 
-![](/Volumes/career/04_note/studyNotes/00-images/React-Lifecircle-table.png)
+![](../00-images/React-Lifecircle-table.png)
 
 ### 组件生命周期执行顺序
 
@@ -435,7 +435,56 @@ class Rot extends React.Component{
   this.props.match.params.id
   ```
 
+  ## 错误边界
+
+```jsx
+import React from 'react'
+
+
+export default class ErrorBoundary extends React.Component {
+  state = {
+    hasError: false,
+    error: null,
+    errorInfo: null,
+  }
+	
+	/**
+	* 子元素发生错误时加载的生命周期函数
+	*/ 
+	componentDidCatch(error, errorInfo) {
+    this.setState({
+      hasError: true,
+      error,
+      errorInfo,
+    })
+  }
+
+	render() {
+    const { error, errorInfo } = this.props;
+    if (this.state.hasError) {
+      return <div>{ this.props.render(error, errorInfo) }</div>
+    } else {
+      return this.props.children;
+    };
+  }
+}
+
+import React, { Fragment } from 'react'
+import ErrorCom from './ErrorCom' // 可能出错的组件
+import ErrorBoundary from './ErrorBoundary'
+
+const Deom = () => {
   
+  
+  return (
+  	<Fragment>
+    	<ErrorBoundary render={(err, info) => {info}}>
+      	<ErrorCom />
+      </ErrorBoundary>
+    </Fragment>
+  )
+}
+```
 
 
 
