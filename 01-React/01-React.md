@@ -435,11 +435,11 @@ class Rot extends React.Component{
   this.props.match.params.id
   ```
 
-  ## 错误边界
+
+##  错误边界
 
 ```jsx
 import React from 'react'
-
 
 export default class ErrorBoundary extends React.Component {
   state = {

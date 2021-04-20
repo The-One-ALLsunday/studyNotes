@@ -1383,6 +1383,511 @@ shopObj.trigger('red', 42);
 shopObj.trigger('black', 43)
 ```
 
+## 响应式原理
+
+- `Object.defineProperty()`中的描述对象`get 和 set`需要临时变量周转
+- defineReactive()函数
+
+```javaScript
+var obj = {}
+function defineReactive(data, key, value) {
+  Object.defineProperty(data, key, {
+    configurable: true,
+    enumerable: true,
+    get() {
+      console.log(value)
+      return value
+    },
+    set(newValue) {
+      console.log('new', newValue);
+      if (value === newValue) {
+        return
+      }
+      value = newValue
+    }
+  })
+}
+
+defineReactive(obj, 'a', 10);
+obj.a++
+console.dir(obj)
+```
+
+![](../00-images/vue响应式原理解析图.png)
+
+### 对象的响应式处理
+
+概念图
+
+![](../00-images/observer.png)
+
+代码解释
+
+```javascript
+var obj = {
+  a: {
+    m: {
+      n: 5,
+    },
+  },
+  b: 12,
+}
+
+function def(obj, key, value, enumerable){
+  Object.defineProperty(obj, key, {
+    value,
+    enumerable,
+    writable: true,
+    configurable: true,
+  })
+}
+
+class Observer{
+  constructor(value) {
+    def(value, '__ob__', this, false);
+    this.walk(value);
+  }
+
+  walk(value) {
+    for (let key in value) {
+      defineReactive(value, key)
+    }
+  }
+}
+
+function defineReactive(data, key, value) {
+  console.log('argument', arguments);
+  if (arguments.length === 2) {
+    value = data[key]
+  }
+  let childOb = observe(value)
+  Object.defineProperty(data, key, {
+    configurable: true,
+    enumerable: true,
+    get() {
+      console.log(`访问${key}属性`)
+      return value
+    },
+    set(newValue) {
+      console.log(`设置${key}属性, 值为${newValue}`)
+      if (value === newValue) {
+        return
+      }
+      value = newValue
+      // 设置了新值，新值也要observe
+      childOb = observe(newValue)
+    }
+  })
+}
+
+function observe(value) {
+  if (typeof value != 'object') return;
+  var ob;
+  if (typeof value.__ob__ !== 'undefined') {
+    ob = value.__ob__
+  } else {
+    ob = new Observer(value);
+  }
+  return ob;
+};
+
+
+observe(obj);
+obj.a.m.n = 11
+console.dir(obj);
+```
+
+### 数组的响应式处理
+
+为了实现vue的数据响应式处理，vue本身改写了一下数组方法，原理：以`Array.prototype`为原型，创建一个叫`arrayMethods`的一个对象，使用ES6提供的`Object.setPrototypeOf()`方法，强制让实例数组的原型(`__proto__`)指向`arrayMethods`对象
+
+- push
+- pop
+- shift
+- unshift
+- splice
+- sort
+- reverse
+
+![](../00-images/array响应式原理.png)
+
+代码解释
+
+```javascript
+var obj = {
+  a: {
+    m: {
+      n: 5,
+    },
+  },
+  b: 12,
+  arr: [],
+}
+
+function def(obj, key, value, enumerable){
+  Object.defineProperty(obj, key, {
+    value,
+    enumerable,
+    writable: true,
+    configurable: true,
+  })
+}
+
+// 1 得到Array的原型对象
+const arrayPrototype = Array.prototype;
+// 2 以Array.prototype为原型，创建arrayMethods对象
+const arrayMethods = Object.create(arrayPrototype);
+// 3 要被改写的7个数组方法
+const methodsNeedChange = ['push', 'pop', 'shift', 'unshift', 'sort', 'splice', 'reverse'];
+methodsNeedChange.forEach(methodName => {
+  // 4 备份原来的方法
+  const original = arrayPrototype[methodName];
+  // 定义新的方法
+  def(arrayMethods, methodName, function() {
+   // 恢复原来功能
+    const result = original.apply(this, arguments);
+    // 让新项也变为响应式数据
+    const ob = this.__ob__;
+    let inserted = null;
+    let args = [...arguments];
+    switch(methodName) {
+      case 'push':
+      case 'unshift': inserted = arguments; break;
+      case 'splice': inserted = args.slice(2); break;
+    };
+
+    // 判断是否有插入的新项, 让新项也变为响应式数据
+    if (inserted) {
+      ob.observeArray(inserted)
+    };
+
+    return result;
+  }, false);
+})
+
+class Observer{
+  constructor(value) {
+    def(value, '__ob__', this, false);
+    // 判断是对象还是数组
+    if (Array.isArray(value)) {
+      Object.setPrototypeOf(value, arrayMethods);
+      this.observeArray(value);
+    } else {
+      this.walk(value);
+    }
+  }
+
+  walk(value) {
+    for (let key in value) {
+      defineReactive(value, key)
+    }
+  }
+  
+  observeArray(array) {
+    for (let i = 0, len = value.length; i < len; i++) {
+      observe(array[i]);
+    }
+  }
+}
+
+function defineReactive(data, key, value) {
+  console.log('argument', arguments);
+  if (arguments.length === 2) {
+    value = data[key]
+  }
+  let childOb = observe(value)
+  Object.defineProperty(data, key, {
+    configurable: true,
+    enumerable: true,
+    get() {
+      console.log(`访问${key}属性`)
+      return value
+    },
+    set(newValue) {
+      console.log(`设置${key}属性, 值为${newValue}`)
+      if (value === newValue) {
+        return
+      }
+      value = newValue
+      // 设置了新值，新值也要observe
+      childOb = observe(newValue)
+    }
+  })
+}
+
+function observe(value) {
+  if (typeof value != 'object') return;
+  var ob;
+  if (typeof value.__ob__ !== 'undefined') {
+    ob = value.__ob__
+  } else {
+    ob = new Observer(value);
+  }
+  return ob;
+};
+
+
+observe(obj);
+obj.a.m.n = 11
+console.dir(obj);
+obj.arr.push(1);
+```
+
+### 收集依赖
+
+- 需要用到数据的地方叫做依赖
+- vue1.x版本中：细粒度依赖，用到数据的DOM都是依赖
+- vue2.x版本中：中等粒度依赖，用到数据的组件都是依赖
+- 在getter中收集依赖，在setter中出发依赖
+
+## Dep 和 Watcher类
+
+- 依赖就是Watcher。只有Watcher触发的getter才会收集依赖，哪个Watcher出发了getter，就把哪个Watcher收集到Dep中。
+- Dep使用了发布订阅模式，当数据发生变化时，会循环依赖列表，把所有的Watcher都通知一遍
+- 代码实现的巧妙之处：Watcher把自己设置到全局的一个指定位置，然后读取数据，因为读取了数据，所以会触发这个数据的getter，在getter中就能得到当前正在读取数据的Watcher，并把这个Watcher收集到Dep中
+
+代码解释
+
+```javaScript
+var obj = {
+  a: {
+    m: {
+      n: 5,
+    },
+  },
+  b: 12,
+  arr: [],
+}
+
+function def(obj, key, value, enumerable){
+  Object.defineProperty(obj, key, {
+    value,
+    enumerable,
+    writable: true,
+    configurable: true,
+  })
+}
+
+// 1 得到Array的原型对象
+const arrayPrototype = Array.prototype;
+// 2 以Array.prototype为原型，创建arrayMethods对象
+const arrayMethods = Object.create(arrayPrototype);
+// 3 要被改写的7个数组方法
+const methodsNeedChange = ['push', 'pop', 'shift', 'unshift', 'sort', 'splice', 'reverse'];
+methodsNeedChange.forEach(methodName => {
+  // 4 备份原来的方法
+  const original = arrayPrototype[methodName];
+  // 定义新的方法
+  def(arrayMethods, methodName, function() {
+    // 恢复原来功能
+    const result = original.apply(this, arguments);
+    // 让新项也变为响应式数据
+    const ob = this.__ob__;
+    let inserted = null;
+    let args = [...arguments];
+    switch(methodName) {
+      case 'push':
+      case 'unshift': inserted = arguments; break;
+      case 'splice': inserted = args.slice(2); break;
+    };
+
+    // 判断是否有插入的新项, 让新项也变为响应式数据
+    if (inserted) {
+      ob.observeArray(inserted)
+    };
+
+    ob.dep.notify();
+
+    return result;
+  }, false);
+})
+
+// Dep class
+class Dep {
+  constructor() {
+    // 发布订阅模式，用数组存储自己的订阅者 数组里面放置watcher的实例
+    this.subs = [];
+  }
+
+  // 添加订阅
+  addSub(sub) {
+    this.subs.push(sub);
+  }
+
+  // 添加依赖
+  depend() {
+    if (Dep.target) {
+      this.addSub.push(Dep.target);
+    }
+  }
+
+  // 通知更新
+  notify() {
+    const subs = this.subs.slice();
+    for (let i = 0, len = subs.length; i < len; i++) {
+      subs[i].update();
+    };
+  }
+  // 扩展，移除订阅
+};
+
+function parsePath(str) {
+  var segments = str.split('.');
+  return (obj) => {
+    for (let i = 0; i < segments.lenth; i++) {
+      if (!obj) return;
+      obj = obj[segments[i]];
+    };
+    return obj;
+  }
+};
+// 例子 使用parsePath
+parsePath('a.m.n')({a: {m: {n: 1}}});
+
+// Watcher class
+class Watcher {
+  constructor(target, expression, callback) {
+    this.target = target
+    this.getter = parsePath(expression)
+    this.callback = callback
+    this.value = this.get()
+  }
+  update() {
+    this.run();
+  }
+  get() {
+    Dep.target = this;
+    const obj = this.target;
+    let value;
+    try {
+      value = this.getter(obj);
+    } finally {
+      Dep.target = null;
+    };
+    return value;
+  }
+  run () {
+    this.getAndInvoke(this.callback);
+  }
+  getAndInvoke(cb) {
+    const value = this.get();
+
+    if (value !== this.value || typeof value === 'object') {
+      const oldValue = this.value;
+      this.value = value;
+      cb.call(this.target, value, oldValue);
+    };
+  }
+};
+
+// Observer class
+class Observer{
+  constructor(value) {
+    this.dep = new Dep();
+    def(value, '__ob__', this, false);
+    // 判断是对象还是数组
+    if (Array.isArray(value)) {
+      Object.setPrototypeOf(value, arrayMethods);
+      this.observeArray(value);
+    } else {
+      this.walk(value);
+    }
+  }
+
+  walk(value) {
+    for (let key in value) {
+      defineReactive(value, key)
+    }
+  }
+
+  observeArray(array) {
+    for (let i = 0, len = array.length; i < len; i++) {
+      observe(array[i]);
+    }
+  }
+}		
+
+function defineReactive(data, key, value) {
+  const dep = new Dep();
+  if (arguments.length === 2) {
+    value = data[key]
+  }
+  let childOb = observe(value)
+  Object.defineProperty(data, key, {
+    configurable: true,
+    enumerable: true,
+    get() {
+      console.log(`访问${key}属性`)
+      if (Dep.target) {
+        dep.depend();
+        if (childOb) {
+          childOb.dep.depend();
+        }
+      }
+      return value
+    },
+    set(newValue) {
+      console.log(`设置${key}属性, 值为${newValue}`)
+      if (value === newValue) {
+        return
+      }
+      value = newValue
+      // 设置了新值，新值也要observe
+      childOb = observe(newValue)
+
+      // 发布订阅模式，通知dev
+      dep.notify()
+    }
+  })
+}
+
+function observe(value) {
+  if (typeof value != 'object') return;
+  var ob;
+  if (typeof value.__ob__ !== 'undefined') {
+    ob = value.__ob__
+  } else {
+    ob = new Observer(value);
+  }
+  return ob;
+};
+
+
+observe(obj);
+new Watcher(obj, 'a.m.n', value => {
+  console.log('watcher is', value);
+})
+obj.a.m.n = 11
+console.dir(obj);
+obj.arr.push(1);
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
