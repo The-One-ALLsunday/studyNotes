@@ -434,16 +434,13 @@ methods: {
 ### 创建期间的生命周期函数
 
 - beforeCreate
-  	+ 第一个生命周期函数
-
+  -  第一个生命周期函数
 - created
    + 第二个生命周期函数
   +  在这个函数中，vm实例中的 data 和 methods 初始化好了，可以使用
-
 - beforMount
     + 第三个生命周期函数
     + 模板在内存中已经编译好了，但是尚未把模板渲染到页面中
-
 - mounted
    + 第四个生命周期函数
   + 内存中的模板已经完全挂载到页面上了，用户已经可以清楚的看到渲染好的页面
@@ -454,25 +451,51 @@ methods: {
 ### 运行期间的生命周期函数
 
 - beforeUpdate
-  	+ 第五个生命周期函数
-  	+ 当data改变时触发这个函数
-  	+ 可以执行0次或者多次
-  	+ **这时候界面上的数据还没有更新，但是数据已经更新了**，页面和内存并未同步
-
+  - 第五个生命周期函数
+  - 当data改变时触发这个函数
+  -  可以执行0次或者多次
+  -  **这时候界面上的数据还没有更新，但是数据已经更新了**，页面和内存并未同步
 - updated
-  	+ 第六个生命周期函数
-  	+ 此时，页面和内存中的数据保持同步了，都是最新的
+  - 第六个生命周期函数
+  -  此时，页面和内存中的数据保持同步了，都是最新的
 
 ### 销毁期间的生命周期函数
 
 - beforeDestroy
-  	+ 第七个生命周期函数
-  	+ vm实例即将进入销毁阶段
-  	+ 此时，vm实例身上的所有的`data`和`methods`以及过滤器、指令等都处于可用状态。
-
+  - 第七个生命周期函数
+  -  vm实例即将进入销毁阶段
+  -  此时，vm实例身上的所有的`data`和`methods`以及过滤器、指令等都处于可用状态。
 - destroyed
-  	+ 第八个生命周期函数
-  	+ 此时组件中的`data`和`methods`以及过滤器、指令等都已经销毁了，不能用了
+  -  第八个生命周期函数
+  -  此时组件中的`data`和`methods`以及过滤器、指令等都已经销毁了，不能用了
+
+### 父子组件生命周期执行顺序
+
+#### 创建时期
+
+- 父组件beforeCreate
+
+- 父组件created
+- 子组件beforeCreate
+- 子组件created
+- 子组件beforeMount
+- 子组件mounted
+- 父组件beforeMount
+- 父组件mounted
+
+#### 运行时期
+
+- 父组件beforeUpdate
+- 子组件beforeUpdate
+- 子组件updated
+- 父组件updated
+
+#### 销毁时期
+
+- 父组件beforeDestroy
+- 子组件beforeDestroy
+- 子组件destoryed
+- 父组件destoryed
 
 ## vue-resource
 
@@ -1638,11 +1661,11 @@ obj.arr.push(1);
 - 需要用到数据的地方叫做依赖
 - vue1.x版本中：细粒度依赖，用到数据的DOM都是依赖
 - vue2.x版本中：中等粒度依赖，用到数据的组件都是依赖
-- 在getter中收集依赖，在setter中出发依赖
+- 在getter中收集依赖，在setter中触发依赖
 
 ## Dep 和 Watcher类
 
-- 依赖就是Watcher。只有Watcher触发的getter才会收集依赖，哪个Watcher出发了getter，就把哪个Watcher收集到Dep中。
+- 依赖就是Watcher。只有Watcher触发的getter才会收集依赖，哪个Watcher触发了getter，就把哪个Watcher收集到Dep中。
 - Dep使用了发布订阅模式，当数据发生变化时，会循环依赖列表，把所有的Watcher都通知一遍
 - 代码实现的巧妙之处：Watcher把自己设置到全局的一个指定位置，然后读取数据，因为读取了数据，所以会触发这个数据的getter，在getter中就能得到当前正在读取数据的Watcher，并把这个Watcher收集到Dep中
 
@@ -1717,7 +1740,7 @@ class Dep {
   // 添加依赖
   depend() {
     if (Dep.target) {
-      this.addSub.push(Dep.target);
+      this.addSub(Dep.target);
     }
   }
 
@@ -1734,7 +1757,7 @@ class Dep {
 function parsePath(str) {
   var segments = str.split('.');
   return (obj) => {
-    for (let i = 0; i < segments.lenth; i++) {
+    for (let i = 0; i < segments.length; i++) {
       if (!obj) return;
       obj = obj[segments[i]];
     };
