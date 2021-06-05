@@ -1011,7 +1011,7 @@ User.findByIdAndUpdate(id, {
 
 
 
-## 最后零散的重点
+## session 和 cookie
 
 - `form`表单上通过`action`和`method`提交的表单数据是**同步请求**
 

@@ -1184,9 +1184,7 @@ webpack是基于Node.js
 - `npm init -y` 生成package.json文件
 - `cnpm i webpack-cli webpack -D`
 - 自动打包文件`npm i webpack-dev-server -D` 再在package.json配置
-  
 + `"dev": "webpack-dev-server --open --port 3000 --contentBase src --hot"`
-  
 - webpack配置文件 `webpack.config.js`
 
   ```javascript
@@ -1237,7 +1235,6 @@ webpack是基于Node.js
   	+ `cnpm i sass-loader node-sass sass fibers -D`
   	+ `cnpm i url-loader file-loader -D`
    + `cnpm i babel-core babel-loader babel-plugin-transform-runtime -D`
-     
 * babel-loader 下载 7.1.5版本，不要下载最新版本
   
   + `cnpm i babel-preset-env babel-preset-stage-0 -D`
@@ -1364,6 +1361,10 @@ vuex是为了保存组件之间共享数据而诞生的，如果组件之间有�
 - 如果组件想直接从state上获取数据，需要this.$store.state.***
 - 如果组件想要修改 state上的数据，必须使用mutations提供方法，需要this.$store.commit('方法的名称'，唯一的一个参数)
 - 如果store中state上的数据，在对外提供的时候，需要一层包装，推荐使用getters，如果需要使用getters，则用this.$store.getters.***
+
+### vuex原理
+
+- Vuex的双向绑定通过调用 new Vue实现，然后通过 Vue.mixin 注入到Vue组件的生命周期中，再通过劫持state.get将数据放入组件中
 
 ## 发布者订阅者模式
 
