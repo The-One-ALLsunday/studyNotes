@@ -1906,6 +1906,16 @@ obj.arr.push(1);
 
 
 
+'query PrimaryStorage where (uuid in (getapi(api='GetPrimaryStorageCandidatesForVmMigration',output='inventories.uuid',vmInstanceUuid='e3069b4225ef4316bc24c00479efd57d',withDataVolumes=true)) and uuid not in ('')) return with (total) order by createDate desc limit 10'
+
+
+
+'query PrimaryStorage where (uuid in (getapi(api='GetPrimaryStorageCandidatesForVmMigration',output='inventories.uuid',vmInstanceUuid='e3069b4225ef4316bc24c00479efd57d',withDataVolumes=false)) and uuid not in ('')) return with (total) order by createDate desc limit 10'
+
+
+
+
+
 
 
 

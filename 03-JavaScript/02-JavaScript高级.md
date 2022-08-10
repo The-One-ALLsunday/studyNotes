@@ -1,4 +1,4 @@
-#  3JavaScript高级学习
+#  JavaScript高级学习
 
 ## 类
 

@@ -145,7 +145,7 @@
 
 ## 通过Node创建web服务器
 
-![](../00-images/projectonline.png)
+![/](../00-images/projectonline.png)
 
 ## 开启gzip配置
 
