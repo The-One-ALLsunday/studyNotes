@@ -288,7 +288,7 @@ module.exports = {
 
 启用热更新有两种方式
 
-**方式一：**在  webpack.config.js  文件中配置以下内容
+**方式一:** 在  webpack.config.js  文件中配置以下内容
 
 ```javascript
 const webpack = require('webpack')
@@ -307,7 +307,7 @@ module.exports = {
 }
 ```
 
-**方式二：**在  package.json文件中配置以下内容
+**方式二：** 在  package.json文件中配置以下内容
 
 ```json
 "scripts:" {
@@ -421,4 +421,3 @@ weback资料第五章
   - 思路：PurifyCSS: 遍历代码，识别已经用到的 CSS class
   - uncss: HTML 需要通过 jsdom 加载，所有的样式通过PostCSS解析，通过 document.querySelector 来识别在 html 文件里面不存在的选择器
   - 插件：purgecss-webpack-plugin 和 mini-css-extract-plugin
-
